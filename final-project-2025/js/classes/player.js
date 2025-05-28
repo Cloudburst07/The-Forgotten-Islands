@@ -371,7 +371,7 @@ class Player {
 
     updatePlayer(deltaTime, collisionBlocks){
     
-        if (!deltaTime) return
+        if (!deltaTime || !isGame) return;
         this.cameraPanning();
         this.applyMovement();
         this.deathZone();
