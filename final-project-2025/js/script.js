@@ -302,8 +302,8 @@ function init(){
     c.msImageSmoothingEnabled     = false;
     c.oImageSmoothingEnabled      = false;
 	document.getElementById("menu").style.display = "none";
-    	startRendering();
 	initCreatures();
+	startRendering();
 	playAmbiance();
 	updateLore();
 	menuMusic.pause();
