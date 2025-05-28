@@ -1,27 +1,25 @@
 const canvas = document.getElementById("canvas");
 const c = canvas.getContext("2d");
-const dpr = window.devicePixelRatio || 1
+const dpr = window.devicePixelRatio || 1;
+let isGame = false;
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const mapScale = 6;
 
-function initCreatures(){
-	const player = new Player({
-	    position : {
-	        x : 96,
-			// x : 640,
-	        y : 704,
-	        oldX : 0,
-	        oldY : 0,
-	    },
-	});
-	const leviathan = new Leviathan();
-	let cameraOffset = {
-	    	x : player.position.x - canvas.width / 2 / mapScale + player.width,
-	    	y : player.position.y - canvas.height / 2 / mapScale + player.height,
-	}
+const player = new Player({
+	position : {
+	x : 96,
+	y : 704,
+	oldX : 0,
+	oldY : 0,
+	},
+});
+const leviathan = new Leviathan();
+let cameraOffset = {
+	x : player.position.x - canvas.width / 2 / mapScale + player.width,
+	y : player.position.y - canvas.height / 2 / mapScale + player.height,
 }
 
 
@@ -302,17 +300,11 @@ function init(){
     c.msImageSmoothingEnabled     = false;
     c.oImageSmoothingEnabled      = false;
 	document.getElementById("menu").style.display = "none";
-	initCreatures();
 	startRendering();
 	playAmbiance();
 	updateLore();
+	isGame = true;
 	menuMusic.pause();
-	    deltaTime = (currentTime - lastTime) / 1000;
-	    lastTime = currentTime;
-	    if(isNaN(deltaTime) || !isFinite(deltaTime)){
-	        console.warn("Bad deltaTime: ", deltaTime);
-	        deltaTime = 0.016; //fallback for if dt is undefined or NaN
-	    }
 }
 
 const observer = new ResizeObserver((entries) => {
