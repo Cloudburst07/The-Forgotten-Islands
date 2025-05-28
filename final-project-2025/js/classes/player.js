@@ -127,6 +127,9 @@ class Player {
 
     applyMovement(){
 //apply accel depending on key pressed
+        if(isPage){
+            return;
+        }
         if(key.w){ 
             this.velocity.y -= this.accel * deltaTime;
             this.spriteType = "run";
