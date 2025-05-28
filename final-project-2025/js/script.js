@@ -7,20 +7,22 @@ canvas.height = innerHeight;
 
 const mapScale = 6;
 
-const player = new Player({
-    position : {
-        x : 96,
-		// x : 640,
-        y : 704,
-        oldX : 0,
-        oldY : 0,
-    },
-});
+function initCreatures(){
+	const player = new Player({
+	    position : {
+	        x : 96,
+			// x : 640,
+	        y : 704,
+	        oldX : 0,
+	        oldY : 0,
+	    },
+	});
+	const leviathan = new Leviathan();
+}
+
 
 const hintImage = new Image();
 hintImage.src = "./images/keys/Pixel Keys x16/Tiles White/pxkw_e.png";
-
-const leviathan = new Leviathan();
 
 let endAnimationFrame;
 let deltaTime = 0.016;
@@ -199,28 +201,6 @@ function back(){
 	document.getElementById("credits").style.display = "none";
 	document.getElementById("info").style.display = "none";
 }
-//initial spawn of the mobs
-function spawnMobs(){
-    for (let i = 0; i < maxMobs; i++) {
-        deltaTime = 0.016;
-        const mob = new CommonMob();
-        mobs.push(mob);
-    }
-    const reduceMobFrequency = 30000 * deltaTime * 1000;
-    const reduceMobOverTime = setInterval(() => {
-        maxMobs -= 1;
-        if(maxMobs <= maxMobs / 2){
-            clearInterval(reduceMobOverTime);
-        }
-    }, reduceMobFrequency);
-}
-
-function respawnMobs(){
-    if(mobs.length < maxMobs){
-        const mob = new CommonMob();
-        mobs.push(mob);
-    }
-}
 
 let frontRendersCanvas
 //animates the game
@@ -279,16 +259,6 @@ function animate(backgroundCanvas){
     player.updatePlayer(deltaTime, collisionBlocks);
 }
 
-//checks for collisions between the player and the common mobs
-// function mobCollisions(){
-//     for(let i = mobs.length - 1; i >= 0; i--){
-//         if(mobs[i].checkPlayerCollision()){
-//             mobs.splice(i, 1);
-//             player.health.value += 250;
-//         }
-//     }
-// }
-
 //update/gameloop
 function update(backgroundCanvas){
     const currentTime = performance.now();
@@ -333,7 +303,8 @@ function init(){
     c.msImageSmoothingEnabled     = false;
     c.oImageSmoothingEnabled      = false;
 	document.getElementById("menu").style.display = "none";
-    startRendering();
+	initCreatures();
+    	startRendering();
 	playAmbiance();
 	updateLore();
 	menuMusic.pause();
