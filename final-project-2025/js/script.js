@@ -308,6 +308,12 @@ function init(){
 	playAmbiance();
 	updateLore();
 	menuMusic.pause();
+	    deltaTime = (currentTime - lastTime) / 1000;
+	    lastTime = currentTime;
+	    if(isNaN(deltaTime) || !isFinite(deltaTime)){
+	        console.warn("Bad deltaTime: ", deltaTime);
+	        deltaTime = 0.016; //fallback for if dt is undefined or NaN
+	    }
 }
 
 const observer = new ResizeObserver((entries) => {
