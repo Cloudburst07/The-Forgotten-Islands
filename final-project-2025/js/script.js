@@ -18,6 +18,10 @@ function initCreatures(){
 	    },
 	});
 	const leviathan = new Leviathan();
+	let cameraOffset = {
+	    	x : player.position.x - canvas.width / 2 / mapScale + player.width,
+	    	y : player.position.y - canvas.height / 2 / mapScale + player.height,
+	}
 }
 
 
@@ -32,11 +36,6 @@ let key = {
     a : false, 
     s : false, 
     d : false
-}
-
-let cameraOffset = {
-    x : player.position.x - canvas.width / 2 / mapScale + player.width,
-    y : player.position.y - canvas.height / 2 / mapScale + player.height,
 }
 
 let mobs = [];
@@ -303,8 +302,8 @@ function init(){
     c.msImageSmoothingEnabled     = false;
     c.oImageSmoothingEnabled      = false;
 	document.getElementById("menu").style.display = "none";
-	initCreatures();
     	startRendering();
+	initCreatures();
 	playAmbiance();
 	updateLore();
 	menuMusic.pause();
